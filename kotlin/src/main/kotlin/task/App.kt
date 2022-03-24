@@ -355,9 +355,6 @@ class Recognizer(private val scanner: Scanner) {
                 WRITE -> recognizeS() || (recognizeS() && recognizeTerminal(SEMI) && recognizeS_())
                 else -> false
             }
-        else {
-            return false;
-        }
     }
 
     private fun recognizeTerminal(value: Int) =
