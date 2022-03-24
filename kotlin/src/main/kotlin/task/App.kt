@@ -257,7 +257,7 @@ class Recognizer(private val scanner: Scanner) {
 
     fun recognize(): Boolean {
         last = scanner.getToken()
-        val status = recognizeE()
+        val status = recognizeS_()
         return if (last == null) status
         else false
     }
