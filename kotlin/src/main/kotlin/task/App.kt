@@ -300,6 +300,10 @@ class Recognizer(private val scanner: Scanner) {
             PLUS -> recognizeTerminal(PLUS)  && recognizeT() && recognizeE_()
             MINUS -> recognizeTerminal(MINUS) && recognizeT() && recognizeE_()
             RPAREN -> true
+            DO -> true
+            TO -> true
+            SEMI -> true
+            DONE -> true
             else -> false
         }
     }
@@ -312,9 +316,13 @@ class Recognizer(private val scanner: Scanner) {
         return when(lookahead) {
             TIMES -> recognizeTerminal(TIMES) && recognizeX() && recognizeT_()
             DIVIDE -> recognizeTerminal(DIVIDE) && recognizeX() && recognizeT_()
-            PLUS-> true;
-            MINUS-> true;
-            RPAREN -> true;
+            PLUS-> true
+            MINUS-> true
+            RPAREN -> true
+            DO -> true
+            TO -> true
+            SEMI -> true
+            DONE -> true
             else -> false
         }
     }
@@ -326,11 +334,15 @@ class Recognizer(private val scanner: Scanner) {
         }
         return when(lookahead) {
             POW -> recognizeTerminal(POW) && recognizeX()
-            TIMES-> true;
-            DIVIDE-> true;
-            PLUS-> true;
-            MINUS-> true;
-            RPAREN -> true;
+            TIMES-> true
+            DIVIDE-> true
+            PLUS-> true
+            MINUS-> true
+            RPAREN -> true
+            DO -> true
+            TO -> true
+            SEMI -> true
+            DONE -> true
             else -> false
         }
     }
@@ -339,7 +351,7 @@ class Recognizer(private val scanner: Scanner) {
         val lookahead = last?.value
 
         return when(lookahead) {
-            FOR -> recognizeTerminal(FOR)
+            FOR -> recognizeFOR()
             VARIABLE -> recognizeA()
             WRITE -> recognizeW()
             else -> false
@@ -349,12 +361,12 @@ class Recognizer(private val scanner: Scanner) {
     fun recognizeS_():Boolean{
         val lookahead = last?.value
 
-            return when(lookahead) {
-                FOR -> recognizeS() || (recognizeS() && recognizeTerminal(SEMI) && recognizeS_())
-                VARIABLE -> recognizeS() || (recognizeS() && recognizeTerminal(SEMI) && recognizeS_())
-                WRITE -> recognizeS() || (recognizeS() && recognizeTerminal(SEMI) && recognizeS_())
-                else -> false
-            }
+        return when(lookahead) {
+            FOR -> recognizeS() || (recognizeS() && recognizeTerminal(SEMI) && recognizeS_())
+            VARIABLE -> recognizeS() || (recognizeS() && recognizeTerminal(SEMI) && recognizeS_())
+            WRITE -> recognizeS() || (recognizeS() && recognizeTerminal(SEMI) && recognizeS_())
+            else -> false
+        }
     }
 
     private fun recognizeTerminal(value: Int) =
