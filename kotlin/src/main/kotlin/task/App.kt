@@ -335,11 +335,11 @@ class Recognizer(private val scanner: Scanner) {
     }
 
     fun recognizeS_():Boolean{
-        recognizeS()
+        val status = recognizeS()
         if(recognizeTerminal(SEMI)){
-            recognizeSS()
+           return recognizeS_()
         }else{
-            return recognizeS_()
+            return status
         }
     }
 
