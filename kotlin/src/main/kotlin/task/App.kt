@@ -278,10 +278,7 @@ class Recognizer(private val scanner: Scanner) {
         return when(lookahead) {
             MINUS -> recognizeTerminal(MINUS) && recognizeF()
             PLUS -> recognizeTerminal(PLUS) && recognizeF()
-            LPAREN -> recognizeF()
-            FLOAT -> recognizeF()
-            VARIABLE -> recognizeF()
-            else -> false
+            else -> recognizeF()
         }
     }
     fun recognizeX():Boolean = recognizeY() && recognizeX_()
@@ -338,13 +335,9 @@ class Recognizer(private val scanner: Scanner) {
     }
 
     fun recognizeS_():Boolean{
-        val lookahead = last?.value
-
-        return when(lookahead) {
-            FOR -> recognizeS() || (recognizeS() && recognizeTerminal(SEMI) && recognizeS_())
-            VARIABLE -> recognizeS() || (recognizeS() && recognizeTerminal(SEMI) && recognizeS_())
-            WRITE -> recognizeS() || (recognizeS() && recognizeTerminal(SEMI) && recognizeS_())
-            else -> false
+        recognizeS()
+        if(recognizeTerminal(SEMI)){
+            recognizeSS()
         }
     }
 
