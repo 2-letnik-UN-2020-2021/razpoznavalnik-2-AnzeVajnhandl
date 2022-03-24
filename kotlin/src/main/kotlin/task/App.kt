@@ -299,12 +299,7 @@ class Recognizer(private val scanner: Scanner) {
         return when(lookahead) {
             PLUS -> recognizeTerminal(PLUS)  && recognizeT() && recognizeE_()
             MINUS -> recognizeTerminal(MINUS) && recognizeT() && recognizeE_()
-            RPAREN -> true
-            DO -> true
-            TO -> true
-            SEMI -> true
-            DONE -> true
-            else -> false
+            else -> true
         }
     }
 
@@ -316,14 +311,7 @@ class Recognizer(private val scanner: Scanner) {
         return when(lookahead) {
             TIMES -> recognizeTerminal(TIMES) && recognizeX() && recognizeT_()
             DIVIDE -> recognizeTerminal(DIVIDE) && recognizeX() && recognizeT_()
-            PLUS-> true
-            MINUS-> true
-            RPAREN -> true
-            DO -> true
-            TO -> true
-            SEMI -> true
-            DONE -> true
-            else -> false
+            else -> true
         }
     }
 
@@ -334,16 +322,7 @@ class Recognizer(private val scanner: Scanner) {
         }
         return when(lookahead) {
             POW -> recognizeTerminal(POW) && recognizeX()
-            TIMES-> true
-            DIVIDE-> true
-            PLUS-> true
-            MINUS-> true
-            RPAREN -> true
-            DO -> true
-            TO -> true
-            SEMI -> true
-            DONE -> true
-            else -> false
+            else -> true
         }
     }
 
