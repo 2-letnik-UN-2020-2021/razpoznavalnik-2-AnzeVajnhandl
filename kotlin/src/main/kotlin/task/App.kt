@@ -339,7 +339,7 @@ class Recognizer(private val scanner: Scanner) {
         if(recognizeTerminal(SEMI)){
             recognizeSS()
         }else{
-            return status
+            return recognizeS_()
         }
     }
 
