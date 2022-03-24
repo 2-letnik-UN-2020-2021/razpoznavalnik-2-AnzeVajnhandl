@@ -331,6 +331,7 @@ class Recognizer(private val scanner: Scanner) {
         }
         return when(lookahead) {
             POW -> recognizeTerminal(POW) && recognizeX()
+            RPAREN -> true
             TIMES-> true
             DIVIDE -> true
             PLUS -> true
