@@ -284,8 +284,9 @@ class Recognizer(private val scanner: Scanner) {
     fun recognizeX():Boolean = recognizeY() && recognizeX_()
     fun recognizeT():Boolean = recognizeX() && recognizeT_()
     fun recognizeE():Boolean = recognizeT() && recognizeE_()
+    fun recognizeA():Boolean = recognizeTerminal(VARIABLE) && recognizeTerminal(ASSIGN) && recognizeE()
     fun recognizeW():Boolean = recognizeTerminal(WRITE) && recognizeE()
-    fun recognizeFOR():Boolean = recognizeTerminal(FOR) && recognizeA() && recognizeTerminal(TO) && recognizeE() && recognizeTerminal(DO) && recognizeS_() && recognizeTerminal(DONE)
+    fun recognizeFOR():Boolean = recognizeTerminal(FOR) && recognizeA() && recognizeTerminal(TO) && recognizeE() && recognizeTerminal(DO) && recognizeS_() && recognizeTerminal(DONE) && recognizeTerminal(SEMI)
 
     fun recognizeE_():Boolean {
         val lookahead = last?.value
@@ -301,20 +302,6 @@ class Recognizer(private val scanner: Scanner) {
             SEMI -> true
             DONE -> true
             else -> false
-        }
-    }
-
-    fun recognizeA():Boolean{
-        if(recognizeTerminal(VARIABLE) && recognizeTerminal(ASSIGN) && recognizeE()){
-            if(recognizeTerminal(SEMI)){
-                return !recognizeTerminal(SEMI)
-            }
-            else{
-                return true;
-            }
-        }
-        else{
-            return false;
         }
     }
 
