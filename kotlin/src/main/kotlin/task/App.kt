@@ -284,9 +284,23 @@ class Recognizer(private val scanner: Scanner) {
     fun recognizeX():Boolean = recognizeY() && recognizeX_()
     fun recognizeT():Boolean = recognizeX() && recognizeT_()
     fun recognizeE():Boolean = recognizeT() && recognizeE_()
-    fun recognizeA():Boolean = recognizeTerminal(VARIABLE) && recognizeTerminal(ASSIGN) && recognizeE()
-    fun recognizeW():Boolean = recognizeTerminal(WRITE) && recognizeE() && recognizeTerminal(SEMI)
+    fun recognizeW():Boolean = recognizeTerminal(WRITE) && recognizeE()
     fun recognizeFOR():Boolean = recognizeTerminal(FOR) && recognizeA() && recognizeTerminal(TO) && recognizeE() && recognizeTerminal(DO) && recognizeS_() && recognizeTerminal(DONE)
+
+    fun recognizeA():Boolean{
+        if(recognizeTerminal(VARIABLE) && recognizeTerminal(ASSIGN) && recognizeE())
+        {
+            if(recognizeTerminal(SEMI)){
+                return true;
+            }
+            else{
+                return true;
+            }
+        }
+        else{
+            return false;
+        }
+    }
 
     fun recognizeE_():Boolean {
         val lookahead = last?.value
@@ -358,7 +372,7 @@ class Recognizer(private val scanner: Scanner) {
     fun recognizeS_():Boolean{
         val status = recognizeS()
         if(recognizeTerminal(SEMI)){
-           return recognizeS_()
+            return recognizeS_()
         }else{
             return status
         }
@@ -376,8 +390,9 @@ fun main(args: Array<String>) {
     val inputStream: InputStream = File(args[0]).inputStream()
     val inputString = inputStream.bufferedReader().use { it.readText() }
     if (Recognizer(Scanner(Example, inputString.byteInputStream())).recognize()) {
-        print("accept")
+        println("accept")
     } else {
-        print("reject")
+        println("reject")
     }
 }
+
