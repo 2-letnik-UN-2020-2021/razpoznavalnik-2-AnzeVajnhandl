@@ -355,12 +355,13 @@ class Recognizer(private val scanner: Scanner) {
         }
     }
 
-    fun recognizeS_():Boolean{
-        val status = recognizeS()
-        if(recognizeTerminal(SEMI)){
-            return recognizeS_()
-        }else{
-            return status
+   fun recognizeS_():Boolean = recognizeS() && recognizeSS_()
+
+    fun recognizeSS_():Boolean{
+        val lookahead = last?.value
+        return when(lookahead){
+            SEMI->recognizeTerminal(SEMI) && recognizeS_()
+            else -> true
         }
     }
 
