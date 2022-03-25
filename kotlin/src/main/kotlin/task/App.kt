@@ -286,7 +286,7 @@ class Recognizer(private val scanner: Scanner) {
     fun recognizeE():Boolean = recognizeT() && recognizeE_()
     fun recognizeA():Boolean = recognizeTerminal(VARIABLE) && recognizeTerminal(ASSIGN) && recognizeE()
     fun recognizeW():Boolean = recognizeTerminal(WRITE) && recognizeE()
-    fun recognizeFOR():Boolean = recognizeTerminal(FOR) && recognizeA() && recognizeTerminal(TO) && recognizeE() && recognizeTerminal(DO) && recognizeE() && recognizeTerminal(DONE)
+    fun recognizeFOR():Boolean = recognizeTerminal(FOR) && recognizeA() && recognizeTerminal(TO) && recognizeE() && recognizeTerminal(DO) && recognizeS_() && recognizeTerminal(DONE)
 
     fun recognizeE_():Boolean {
         val lookahead = last?.value
