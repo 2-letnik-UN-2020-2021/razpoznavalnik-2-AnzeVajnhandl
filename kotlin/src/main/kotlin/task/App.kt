@@ -285,7 +285,7 @@ class Recognizer(private val scanner: Scanner) {
     fun recognizeT():Boolean = recognizeX() && recognizeT_()
     fun recognizeE():Boolean = recognizeT() && recognizeE_()
     fun recognizeA():Boolean = recognizeTerminal(VARIABLE) && recognizeTerminal(ASSIGN) && recognizeE()
-    fun recognizeW():Boolean = recognizeTerminal(WRITE) && recognizeS_()
+    fun recognizeW():Boolean = recognizeTerminal(WRITE) && recognizeE()
     fun recognizeFOR():Boolean = recognizeTerminal(FOR) && recognizeA() && recognizeTerminal(TO) && recognizeE() && recognizeTerminal(DO) && recognizeS_() && recognizeTerminal(DONE)
 
     fun recognizeE_():Boolean {
