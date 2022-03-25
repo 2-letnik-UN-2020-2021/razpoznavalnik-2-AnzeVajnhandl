@@ -390,9 +390,9 @@ fun main(args: Array<String>) {
     val inputStream: InputStream = File(args[0]).inputStream()
     val inputString = inputStream.bufferedReader().use { it.readText() }
     if (Recognizer(Scanner(Example, inputString.byteInputStream())).recognize()) {
-        println("accept")
+        print("accept")
     } else {
-        println("reject")
+        print("reject")
     }
 }
 
