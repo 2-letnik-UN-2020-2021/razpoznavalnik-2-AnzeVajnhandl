@@ -284,23 +284,9 @@ class Recognizer(private val scanner: Scanner) {
     fun recognizeX():Boolean = recognizeY() && recognizeX_()
     fun recognizeT():Boolean = recognizeX() && recognizeT_()
     fun recognizeE():Boolean = recognizeT() && recognizeE_()
+    fun recognizeA():Boolean = recognizeTerminal(VARIABLE) && recognizeTerminal(ASSIGN) && recognizeE()
     fun recognizeW():Boolean = recognizeTerminal(WRITE) && recognizeE()
     fun recognizeFOR():Boolean = recognizeTerminal(FOR) && recognizeA() && recognizeTerminal(TO) && recognizeE() && recognizeTerminal(DO) && recognizeS_() && recognizeTerminal(DONE)
-
-    fun recognizeA():Boolean{
-        if(recognizeTerminal(VARIABLE) && recognizeTerminal(ASSIGN) && recognizeE())
-        {
-            if(recognizeTerminal(SEMI)){
-                return true;
-            }
-            else{
-                return true;
-            }
-        }
-        else{
-            return false;
-        }
-    }
 
     fun recognizeE_():Boolean {
         val lookahead = last?.value
@@ -395,4 +381,3 @@ fun main(args: Array<String>) {
         print("reject")
     }
 }
-
